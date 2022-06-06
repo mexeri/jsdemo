@@ -33,10 +33,10 @@ Element.prototype.setUrgent = function() { // element ősobject bővítése
     this.style.border = "solid 2px red";
 }
 
-let topInput = document.querySelector("input#topInput");
+/*let topInput = document.querySelector("input#topInput");
 topInput.getAttribute("class"); //html elem attribútumai
 topInput.attributes;
-topInput.setAttribute("type", "email"); // html attribútum set
+topInput.setAttribute("type", "email"); // html attribútum set*/
 
 let myNodeList = document.querySelectorAll("input"); // az összes input típusú html elem módosítása
 for(let i=0;i<myNodeList.length;i++){
@@ -71,6 +71,44 @@ sendButton.addEventListener("click", function(){ // + eventlistener
     alert("Hello JS!");
 });
 
+let orderForm = document.querySelector("#orderForm");
+orderForm.addEventListener("submit",function(ev){
+    ev.preventDefault();// az alap esemény blokkolása
+    console.log(this);
+    let inputs = this.querySelectorAll("input");
+    let values = {};
+    for(let i =0; i<inputs.length; i++) values[inputs[i].name]= inputs[i].value;
+    console.log(values);
+});
+//new Date().getDay(); // 0 index, vasárnappal kezdődik 
+
+let alerCloseButtons = document.querySelectorAll(".btn-close[data-bs-dismiss='alert']");
+let alertCloseEventHandlerFunction = function(ev){
+    this.parentElement.style.display = "none"; //gomb parent elementjének elrejtése
+};
+
+for(let i = 0; i<alerCloseButtons.length; i++){
+    alerCloseButtons[i].addEventListener("click",alertCloseEventHandlerFunction);
+        //console.log(ev);       
+    };
+
+//select elem kitöltése
+
+let toppings= [
+    "szalonna",
+    "hagyma",
+    "tojás",
+    "paradicsom"
+];
+let toppingSelect = document.querySelector("#topInput");
+let i =0;
+    while(i<toppings.length){
+        let option = document.createElement("option");
+        option.value=toppings[i];
+        option.innerHTML=toppings[i];
+        toppingSelect.appendChild(option);
+        i++;
+    }
 
 
 function calcAmount()
